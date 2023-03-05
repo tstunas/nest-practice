@@ -1,6 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import qs from 'qs';
 import { lastValueFrom } from 'rxjs';
 
 @Injectable()
@@ -60,24 +61,26 @@ export class AppService {
 
   async kakaoLogin(code: string) {
     const response = await lastValueFrom(
-      this.httpService.post('https://kauth.kakao.com/oauth/token', {
-        params: {
+      this.httpService.post(
+        'https://kauth.kakao.com/oauth/token',
+        qs.stringify({
           grant_type: 'authorization_code',
           client_id: this.kakaoClientId,
           redirect_uri: this.kakaoClientRedirectUri,
           code,
+        }),
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
         },
-      }, {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        }
-      }),
+      ),
     ).catch((err) => {
       throw new InternalServerErrorException({
         message: err.message,
       });
     });
-    console.log(response.data)
+    console.log(response.data);
     return response.data;
   }
 }
