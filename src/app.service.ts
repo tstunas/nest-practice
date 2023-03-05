@@ -17,6 +17,8 @@ export class AppService {
   ) {}
 
   async naverLogin(code: string, state: string) {
+    console.log('test')
+
     const response = await lastValueFrom(
       this.httpService.get('https://nid.naver.com/oauth2.0/token', {
         params: {
