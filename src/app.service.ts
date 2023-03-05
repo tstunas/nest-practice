@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import qs from 'qs';
+import { stringify } from 'qs';
 import { lastValueFrom } from 'rxjs';
 
 @Injectable()
@@ -63,7 +63,7 @@ export class AppService {
     const response = await lastValueFrom(
       this.httpService.post(
         'https://kauth.kakao.com/oauth/token',
-        qs.stringify({
+        stringify({
           grant_type: 'authorization_code',
           client_id: this.kakaoClientId,
           redirect_uri: this.kakaoClientRedirectUri,
