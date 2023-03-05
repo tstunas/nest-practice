@@ -9,7 +9,7 @@ async function bootstrap() {
       cert: readFileSync('/etc/letsencrypt/archive/www.sparta-tstunas.shop/cert1.pem'), 
     },
     cors: {
-      origin: '*',
+      origin: true,
       credentials: true,
     },
   });
