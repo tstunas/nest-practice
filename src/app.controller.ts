@@ -5,4 +5,13 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  @Post('naver')
+  naverLogin(): string {
+    return this.appService.naverLogin();
+  }
+  
+  @Post('kakao')
+  kakaoLogin(): string {
+    return this.appService.kakaoLogin();
+  }
 }
