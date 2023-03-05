@@ -8,6 +8,6 @@ async function bootstrap() {
       credentials: true,
     },
   });
-  await app.listen(443);
+  await app.listen(80);
 }
 bootstrap();
