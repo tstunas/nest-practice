@@ -12,6 +12,7 @@ export class AppService {
     'NAVER_CLIENT_REDIRECT_URI',
   );
   private kakaoClientId = this.configService.get('KAKAO_CLIENT_ID');
+  private kakaoClientSecert = this.configService.get('KAKAO_CLIENT_SECRET');
   private kakaoClientRedirectUri = this.configService.get(
     'KAKAO_CLIENT_REDIRECT_URI',
   );
@@ -66,6 +67,7 @@ export class AppService {
         stringify({
           grant_type: 'authorization_code',
           client_id: this.kakaoClientId,
+          client_secret: this.kakaoClientSecert,
           redirect_uri: this.kakaoClientRedirectUri,
           code,
         }),
