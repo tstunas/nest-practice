@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -6,8 +6,8 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Post('naver')
-  naverLogin(): string {
-    return this.appService.naverLogin();
+  naverLogin(@Body('code') code: string, @Body('state') state: string) {
+    return this.appService.naverLogin(code, state);
   }
   
   @Post('kakao')
