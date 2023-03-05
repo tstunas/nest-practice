@@ -17,7 +17,7 @@ export class AppService {
   ) {}
 
   async naverLogin(code: string, state: string) {
-    console.log('test')
+    console.log('test');
 
     const response = await lastValueFrom(
       this.httpService.get('https://nid.naver.com/oauth2.0/token', {
@@ -34,6 +34,24 @@ export class AppService {
         message: err.message,
       });
     });
+    response.data; // access_token
+
+    const authHeader = `Bearer ${response.data?.access_token}`;
+
+    await lastValueFrom(
+      this.httpService.get('https://openapi.naver.com/v1/nid/me', {
+        headers: {
+          Authorization: authHeader,
+        },
+      }),
+    )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
     return response.data;
   }
 
