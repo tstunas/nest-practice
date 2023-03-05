@@ -16,7 +16,8 @@ export class AppController {
   }
 
   @Post('kakao')
-  kakaoLogin(): string {
-    return this.appService.kakaoLogin();
+  async kakaoLogin(@Body('code') code: string) {
+    return await this.appService.kakaoLogin(code);
   }
+
 }
