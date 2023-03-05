@@ -82,7 +82,24 @@ export class AppService {
         message: err.message,
       });
     });
-    console.log(response.data);
+
+    const authHeader = `Bearer ${response.data?.access_token}`;
+
+    await lastValueFrom(
+      this.httpService.get('https://kapi.kakao.com/v2/user/me', {
+        headers: {
+          Authorization: authHeader,
+        },
+      }),
+    )
+      .then((res) => {
+        console.log(res.data.response);
+        const { nickname, email, name } = res.data.response;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
     return response.data;
   }
 }
