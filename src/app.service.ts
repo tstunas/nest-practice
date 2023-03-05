@@ -93,8 +93,7 @@ export class AppService {
       }),
     )
       .then((res) => {
-        console.log(res.data.response);
-        const { nickname, email, name } = res.data.response;
+        console.log(res.data);
       })
       .catch((err) => {
         console.error(err);
