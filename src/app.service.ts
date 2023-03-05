@@ -46,7 +46,7 @@ export class AppService {
       }),
     )
       .then((res) => {
-        console.log(res);
+        console.log(res.data.response);
       })
       .catch((err) => {
         console.error(err);
