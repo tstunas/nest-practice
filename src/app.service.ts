@@ -34,9 +34,7 @@ export class AppService {
         },
       }),
     ).catch((err) => {
-      throw new InternalServerErrorException({
-        message: err.message,
-      });
+      throw new InternalServerErrorException(err);
     });
     response.data; // access_token
 
@@ -78,9 +76,7 @@ export class AppService {
         },
       ),
     ).catch((err) => {
-      throw new InternalServerErrorException({
-        message: err.message,
-      });
+      throw new InternalServerErrorException(err);
     });
 
     const authHeader = `Bearer ${response.data?.access_token}`;
