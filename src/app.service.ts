@@ -24,7 +24,7 @@ export class AppService {
         params: {
           grant_type: 'authorization_code',
           client_id: this.naverClientId,
-          client_secret: this.naverClientRedirectUri,
+          client_secret: this.naverClientSecert,
           code,
           state,
         },
